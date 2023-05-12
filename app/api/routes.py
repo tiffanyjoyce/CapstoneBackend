@@ -158,5 +158,30 @@ def rentals():
 
         print(response2.json())  
         return response2.json()
+    
+@api.post('/hotel/details')
+def hotel_details():
+    hotelId = request.json.get('hotelId')
+    indate= request.json.get('indate')
+    outdate=request.json.get('outdate')
+    print(hotelId, indate, outdate)
+
+    url = "https://tripadvisor16.p.rapidapi.com/api/v1/hotels/getHotelDetails"
+
+    querystring = {"id":hotelId,"checkIn":indate,"checkOut":outdate,"currency":"USD"}
+
+    headers = {
+	    'X-RapidAPI-Key': '07c65bd2ddmsh378abedbb7aca68p159664jsn95efed7aa6dc',
+	    "X-RapidAPI-Host": "tripadvisor16.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    print(response.json()) 
+    return response.json() 
+
+# api.route('/trip')
+# def create_trip():
+    
 
 
